@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        temp: use_jdbc_metadata_defaults = false
+
+liquibase:
+  change-log: classpath:db/changelog/db.chengelog-master.xml
+
+server:
+  port: 5432
+
+jpa:
+  hibernate:
+    ddl-auto: update
+  show-sql: true
+  database: postgres
+  database-platform: org.hibernate.dialect.PostgreSQLDialect
+  open-in-view: false
+  generate-ddl: true
