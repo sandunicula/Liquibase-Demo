@@ -1,0 +1,25 @@
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/students
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        #drop and create new tables
+        ddl-auto: create
+        temp: use_jdbc_metadata_defaults = false
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: false
+
+server:
+  port: 8081

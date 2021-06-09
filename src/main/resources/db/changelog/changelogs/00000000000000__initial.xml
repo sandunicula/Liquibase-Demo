@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet dbms="postgresql" author="sandu.nicula" id="202106081055__create_tables">
+
+        <createTable tableName="student">
+
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_student"/>
+            </column>
+            <column name="first_name" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="course">
+
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_course"/>
+            </column>
+            <column name="title" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="credits" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="teacher_name" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="student_course">
+
+             <column name="student_id" type="bigint">
+                 <constraints nullable="false" foreignKeyName="fk_student_id" references="student(id)"/>
+             </column>
+             <column name="course_id" type="bigint" autoIncrement="true">
+                 <constraints nullable="false" foreignKeyName="fk_course_id" references="course(id)"/>
+             </column>
+
+         </createTable>
+
+    </changeSet>
+
+    <changeSet dbms="postgresql" author="sandu.nicula" id="202106081056__populate_table_student">
+
+        <insert tableName="student">
+            <column name="first_name" value="Sandu"/>
+            <column name="last_name" value="Nicula"/>
+            <column name="email" value="sandu.nicula@email.com"/>
+            <column name="phone" value="+37368059000"/>
+        </insert>
+
+        <insert tableName="student">
+            <column name="first_name" value="Victor"/>
+            <column name="last_name" value="Jones"/>
+            <column name="email" value="vitor.jones@email.com"/>
+            <column name="phone" value="+37368059800"/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet dbms="postgresql" author="sandu.nicula" id="202106081735__populate_table_course">
+
+        <insert tableName="course">
+            <column name="title" value="OOP"/>
+            <column name="credits" value="5"/>
+            <column name="teacher_name" value="Edward Snow"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
