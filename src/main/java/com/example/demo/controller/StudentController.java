@@ -1,10 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.DTO.CourseDTO;
 import com.example.demo.entity.DTO.StudentDTO;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,9 +50,14 @@ public class StudentController {
             return studentRepository.save(updatedStudent);
         });
     }
-//TODO: Ask why not working with StudentDTO
+
     @PostMapping("/students")
     public Student addStudent(@RequestBody Student newStudent) {
         return studentRepository.save(newStudent);
+    }
+
+    @DeleteMapping("/students/{id}")
+    public void deleteStudent(@PathVariable("id") Long id) {
+        studentRepository.deleteById(id);
     }
 }

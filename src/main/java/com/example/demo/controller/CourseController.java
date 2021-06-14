@@ -2,9 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Course;
 import com.example.demo.entity.DTO.CourseDTO;
-import com.example.demo.entity.Student;
 import com.example.demo.repository.CourseRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,5 +53,10 @@ public class CourseController {
     @PostMapping("/courses")
     public Course addCourse(@RequestBody Course newCourse) {
         return courseRepository.save(newCourse);
+    }
+
+    @DeleteMapping("/courses/{id}")
+    public void deleteCourse(@PathVariable("id") Long id) {
+        courseRepository.deleteById(id);
     }
 }
