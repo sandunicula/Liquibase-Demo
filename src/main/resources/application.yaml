@@ -23,3 +23,15 @@ spring:
 
 server:
   port: 8081
+
+logging:
+  file:
+    name: logging-data.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: Liquibase-Demo-%d{yyyy-MM-dd}.%i.log
+      max-file-size: 1MB
+      total-size-cap: 10MB
+      max-history: 14
+  level:
+    org.springframework.web: info

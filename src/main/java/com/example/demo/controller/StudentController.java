@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.entity.DTO.StudentDTO;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,24 +22,29 @@ public class StudentController {
 
     StudentRepository studentRepository;
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     public StudentController(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     @GetMapping("/students")
     public ResponseEntity<List<Student>> getStudents() {
+        logger.info("Retrieved all students");
         List<Student> students = studentRepository.findAll();
         return ResponseEntity.ok(students);
     }
 
     @GetMapping("students/{id}")
     public ResponseEntity<Optional<Student>> getStudent(@PathVariable Long id) {
+        logger.info("Retrieved student with id {} ", id);
         Optional<Student> student = studentRepository.findById(id);
         return ResponseEntity.ok(student);
     }
 
     @PutMapping("/students/{id}")
     public Student updateStudent(@RequestBody StudentDTO updatedStudent, @PathVariable Long id) {
+        logger.info("Updated student with id {} ", id);
         Optional<Student> student = studentRepository.findById(id);
         return student.map(s -> {
             s.setFirstName(updatedStudent.getFirstName());
@@ -53,11 +60,13 @@ public class StudentController {
 
     @PostMapping("/students")
     public Student addStudent(@RequestBody Student newStudent) {
+        logger.info("Added student with id {} ", newStudent.getId());
         return studentRepository.save(newStudent);
     }
 
     @DeleteMapping("/students/{id}")
     public void deleteStudent(@PathVariable("id") Long id) {
+        logger.info("Deleted student with id {} ", id);
         studentRepository.deleteById(id);
     }
 }
