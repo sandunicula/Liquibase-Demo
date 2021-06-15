@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>Liquibase-Demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>Liquibase-Demo</name>
     <description>Demo project for Spring Boot and Liquibase with PostgreSQL</description>
 
     <properties>
@@ -69,9 +69,17 @@
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>${jib-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <to>
-                        <image>registry.hub.docker.com/sandunicula/liquibase-demo</image>
+                        <image>registry.hub.docker.com/sandunicula/students-courses</image>
                     </to>
                 </configuration>
             </plugin>
