@@ -34,3 +34,4 @@ build/
 
 ### Logging ###
 logging-data.log
+*.log
